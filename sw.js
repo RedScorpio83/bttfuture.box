@@ -1,6 +1,6 @@
 self.addEventListener("install", event => {
   event.waitUntil(
-    caches.open("esphome-cache").then(cache => {
+    caches.open("kitt-cache").then(cache => {
       return cache.addAll(["/", "/index.html", "/manifest.json"]);
     })
   );
