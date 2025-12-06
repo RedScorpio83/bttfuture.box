@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Knight Rider Controller</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#ff0000">
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("sw.js");
+    }
+  </script>
+</head>
+<body>
+  <h1>Controllo ESPHome</h1>
+  <button onclick="toggleLight()">Toggle LED</button>
+
+  <script>
+    const ESPHOME_IP = "http://192.168.1.50"; // <-- cambia con l'IP del tuo ESP32
+
+    async function toggleLight() {
+      try {
+        await fetch(`${ESPHOME_IP}/light/light1/toggle`, { method: "POST" });
+        alert("Comando inviato!");
+      } catch (err) {
+        alert("Errore: " + err);
+      }
+    }
+  </script>
+</body>
+</html>
