@@ -10,22 +10,72 @@
       navigator.serviceWorker.register("sw.js");
     }
   </script>
+  <style>
+    body { font-family: sans-serif; background: #111; color: #eee; padding: 20px; }
+    h1 { color: #ff0000; }
+    .section { margin-bottom: 30px; }
+    label, select, input[type="range"] { display: block; margin: 10px 0; }
+    button { margin-top: 10px; padding: 8px 16px; background: #ff0000; color: white; border: none; cursor: pointer; }
+  </style>
 </head>
 <body>
-  <h1>Controllo ESPHome</h1>
-  <button onclick="toggleLight()">Toggle LED</button>
+  <h1>Knight Rider Controller</h1>
+
+  <div class="section">
+    <h2>Diagnostica</h2>
+    <p>IP: <span id="ip">--</span></p>
+    <p>WiFi: <span id="wifi">--</span></p>
+  </div>
+
+  <div class="section">
+    <h2>Effetti LED</h2>
+    <label for="effect">Effetto:</label>
+    <select id="effect">
+      <option value="Rainbow">Rainbow</option>
+      <option value="Scritta Fade">Scritta Fade</option>
+      <option value="KITT Scanner">KITT Scanner</option>
+    </select>
+    <button onclick="setEffect()">Applica Effetto</button>
+  </div>
+
+  <div class="section">
+    <h2>Controllo Intensità</h2>
+    <label for="brightness">Luminosità:</label>
+    <input type="range" id="brightness" min="0" max="255" value="255">
+    <button onclick="setBrightness()">Imposta</button>
+  </div>
 
   <script>
-    const ESPHOME_IP = "http://192.168.1.50"; // <-- cambia con l'IP del tuo ESP32
+    const ESPHOME_IP = "http://192.168.10.118";
 
-    async function toggleLight() {
-      try {
-        await fetch(`${ESPHOME_IP}/light/light1/toggle`, { method: "POST" });
-        alert("Comando inviato!");
-      } catch (err) {
-        alert("Errore: " + err);
-      }
+    async function setEffect() {
+      const effect = document.getElementById("effect").value;
+      await fetch(`${ESPHOME_IP}/light/neopixel_section5/turn_on`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ effect })
+      });
+      alert("Effetto impostato: " + effect);
     }
+
+    async function setBrightness() {
+      const brightness = parseInt(document.getElementById("brightness").value);
+      await fetch(`${ESPHOME_IP}/light/neopixel_section5/turn_on`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ brightness })
+      });
+      alert("Luminosità impostata: " + brightness);
+    }
+
+    async function fetchDiagnostics() {
+      const ip = await fetch(`${ESPHOME_IP}/text_sensor/ip_address`).then(r => r.text()).catch(() => "--");
+      const wifi = await fetch(`${ESPHOME_IP}/sensor/wifi_signal_percent`).then(r => r.text()).catch(() => "--");
+      document.getElementById("ip").textContent = ip;
+      document.getElementById("wifi").textContent = wifi + " %";
+    }
+
+    fetchDiagnostics();
   </script>
 </body>
 </html>
