@@ -15,31 +15,26 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="Back to the Future II">
 
-  <!-- Icone per iOS (usa PNG 192x192 e 512x512) -->
+  <!-- Icone per iOS -->
   <link rel="apple-touch-icon" sizes="192x192" href="icons/icon-192.png">
   <link rel="apple-touch-icon" sizes="512x512" href="icons/icon-512.png">
 
-  <!-- Viewport per iOS -->
+  <!-- Viewport -->
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
   <script>
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.register("sw.js");
     }
+    // Redirect diretto alla UI ESPHome
+    window.location.replace("http://backttfuture.local/");
   </script>
 
   <style>
     body { margin: 0; background: #000; }
-    iframe {
-      width: 100vw;
-      height: 100vh;
-      border: none;
-      background: #fff; /* fallback per evitare schermo nero */
-    }
   </style>
 </head>
 <body>
-  <!-- Incornicia direttamente la UI ESPHome -->
-  <iframe src="http://backttfuture.local/"></iframe>
+  <!-- Nessun iframe, solo redirect -->
 </body>
 </html>
