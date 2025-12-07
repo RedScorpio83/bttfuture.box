@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Knight Rider Controller</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#ff0000">
+
+  <!-- Meta specifici per iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Back to the Future II">
+
+  <!-- Icone per iOS -->
+  <link rel="apple-touch-icon" sizes="192x192" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" sizes="512x512" href="icons/icon-512.png">
+
+  <!-- Viewport -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">  
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("sw.js");
+    }
+
+    function isRunningInPWA() {
+      return window.matchMedia('(display-mode: standalone)').matches 
+             || window.navigator.standalone === true;
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const btn = document.getElementById('enjoyBtn');
+      if (isRunningInPWA()) {
+        // Se è aperto come PWA installata → nascondi il bottone e fai redirect
+        btn.style.display = 'none';
+        window.location.href = 'http://backttfuture.local/';
+      } else {
+        // Se è aperto dal browser → mostra il bottone
+        btn.style.display = 'block';
+      }
+    });
+  </script>
+  <style>
+    body { 
+      margin: 0; 
+      background: #000; 
+      display: flex; 
+      justify-content: center; 
+      align-items: center; 
+      height: 100vh; 
+    }
+    button {
+      background: #ff0000;
+      color: #fff;
+      font-size: 2rem;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      display: none; /* nascosto di default */
+    }
+    button:hover {
+      background: #cc0000;
+    }
+  </style>
+</head>
+<body>
+  <button id="enjoyBtn" onclick="window.location.href='http://backttfuture.local/'">Enjoy</button>
+</body>
+</html>
