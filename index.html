@@ -26,8 +26,6 @@
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.register("sw.js");
     }
-    // Redirect diretto alla UI ESPHome
-    window.location.replace("http://backttfuture.local/");
   </script>
 
   <style>
@@ -35,6 +33,8 @@
   </style>
 </head>
 <body>
-  <!-- Nessun iframe, solo redirect -->
+  <script>
+    window.location.href = "http://backttfuture.local/";
+  </script>
 </body>
 </html>
