@@ -6,7 +6,6 @@
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#ff0000">
 
-
   <!-- Meta specifici per iOS -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -24,19 +23,29 @@
     }
   </script>
   <style>
-    body { margin: 0; background: #000; }
-    iframe {
-      width: 100vw;
-      height: 100vh;
+    body { 
+      margin: 0; 
+      background: #000; 
+      display: flex; 
+      justify-content: center; 
+      align-items: center; 
+      height: 100vh; 
+    }
+    button {
+      background: #ff0000;
+      color: #fff;
+      font-size: 2rem;
+      padding: 1rem 2rem;
       border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #cc0000;
     }
   </style>
 </head>
 <body>
-  <script>
-    window.location.href = "http://backttfuture.local/";
-  </script>
+  <button onclick="window.location.href='http://backttfuture.local/'">Enjoy</button>
 </body>
 </html>
-
-
