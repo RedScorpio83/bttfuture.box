@@ -27,12 +27,17 @@
     }
 
     window.addEventListener('DOMContentLoaded', () => {
-      
       if (isRunningInPWA()) {
-        // Se è aperto come PWA installata → nascondi il bottone e fai redirect
-        window.location.href = 'http://backttfuture.local/';
+        // Mostra la schermata di loading
+        document.getElementById('loadingScreen').style.display = 'flex';
+
+        // Attendi un attimo e poi fai redirect
+        setTimeout(() => {
+          window.location.href = 'http://backttfuture.local/';
+        }, 1500); // tempo di attesa in ms
       } else {
-        // Se è aperto dal browser → mostra il bottone
+        // Se è aperto dal browser → nascondi la schermata di loading
+        document.getElementById('loadingScreen').style.display = 'none';
       }
     });
   </script>
@@ -88,7 +93,23 @@
   </style>
 </head>
 <body>
-
+  <!-- Schermata di loading -->
+  <div id="loadingScreen" style="
+    position: fixed;
+    inset: 0;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 9999;
+  ">
+    <img src="icons/icon-512.png" alt="Loading" style="width: 120px; height: 120px;">
+    <p style="color:#ffcc00; font-family:'Orbitron', sans-serif; margin-top:1rem;">
+      ⏳ Caricamento...
+    </p>
+  </div>
+  
   <div class="lang-switch">
     <button onclick="setLang('it')">🇮🇹 Italiano</button>
     <button onclick="setLang('en')">🇬🇧 English</button>
