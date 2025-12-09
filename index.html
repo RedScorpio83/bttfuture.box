@@ -17,10 +17,6 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">  
   <script>
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("sw.js");
-    }
-
     function isRunningInPWA() {
       return window.matchMedia('(display-mode: standalone)').matches 
              || window.navigator.standalone === true;
@@ -28,19 +24,65 @@
 
     window.addEventListener('DOMContentLoaded', () => {
       if (isRunningInPWA()) {
-        // Mostra la schermata di loading
         document.getElementById('loadingScreen').style.display = 'flex';
 
-        // Attendi un attimo e poi fai redirect
+        // Riproduci il suono
+        const sound = document.getElementById('loadingSound');
+        sound.play().catch(() => {
+          // Alcuni browser richiedono interazione utente per l'audio
+          console.log("Audio bloccato finché non c'è interazione");
+        });
+
+        // Redirect dopo un paio di secondi
         setTimeout(() => {
           window.location.href = 'http://backttfuture.local/';
-        }, 1500); // tempo di attesa in ms
+        }, 2000);
       } else {
-        // Se è aperto dal browser → nascondi la schermata di loading
         document.getElementById('loadingScreen').style.display = 'none';
       }
     });
   </script>
+  <style>
+    #loadingScreen {
+      position: fixed;
+      inset: 0;
+      background: #000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+    .spinner {
+      display: flex;
+      gap: 1rem;
+    }
+    .spinner div {
+      width: 20px;
+      height: 20px;
+      background: #ffcc00;
+      border-radius: 50%;
+      animation: pulse 0.8s infinite alternate;
+    }
+    .spinner div:nth-child(2) {
+      animation-delay: 0.2s;
+      background: #ff0000;
+    }
+    .spinner div:nth-child(3) {
+      animation-delay: 0.4s;
+      background: #00ccff;
+    }
+    @keyframes pulse {
+      from { transform: scale(1); opacity: 0.6; }
+      to { transform: scale(1.6); opacity: 1; }
+    }
+    .loadingText {
+      margin-top: 1rem;
+      font-family: 'Orbitron', sans-serif;
+      color: #ffcc00;
+      text-shadow: 1px 1px #ff0000;
+    }
+  </style>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap');
 
@@ -94,20 +136,12 @@
 </head>
 <body>
   <!-- Schermata di loading -->
-  <div id="loadingScreen" style="
-    position: fixed;
-    inset: 0;
-    background: #000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    z-index: 9999;
-  ">
-    <img src="icons/icon-512.png" alt="Loading" style="width: 120px; height: 120px;">
-    <p style="color:#ffcc00; font-family:'Orbitron', sans-serif; margin-top:1rem;">
-      ⏳ Caricamento...
-    </p>
+  <div id="loadingScreen">
+    <div class="spinner">
+      <div></div><div></div><div></div>
+    </div>
+    <p class="loadingText">⚡ In viaggio nel tempo...</p>
+    <audio id="loadingSound" src="sounds/whoosh.mp3" preload="auto"></audio>
   </div>
   
   <div class="lang-switch">
