@@ -27,14 +27,12 @@
     }
 
     window.addEventListener('DOMContentLoaded', () => {
-      const btn = document.getElementById('enjoyBtn');
+      
       if (isRunningInPWA()) {
         // Se è aperto come PWA installata → nascondi il bottone e fai redirect
-        btn.style.display = 'none';
         window.location.href = 'http://backttfuture.local/';
       } else {
         // Se è aperto dal browser → mostra il bottone
-        btn.style.display = 'block';
       }
     });
   </script>
