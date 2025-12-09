@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Back to the Future II</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#ff0000">
+
+  <!-- Meta iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Back to the Future II">
+
+  <!-- Icone -->
+  <link rel="apple-touch-icon" sizes="192x192" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" sizes="512x512" href="icons/icon-512.png">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">  
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap');
+
+    body {
+      font-family: 'Orbitron', sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, #000 40%, #222 100%);
+      color: #fff;
+      padding: 2rem;
+      line-height: 1.6;
+    }
+    h1 {
+      color: #ffcc00;
+      text-align: center;
+      text-shadow: 2px 2px #ff0000;
+    }
+    .section {
+      margin: 2rem 0;
+      padding: 1rem;
+      background: rgba(34,34,34,0.9);
+      border-radius: 8px;
+      border: 1px solid #ff0000;
+    }
+    ol {
+      padding-left: 1.2rem;
+    }
+    li {
+      margin-bottom: 0.5rem;
+    }
+    .note {
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+    .lang-switch {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    button {
+      background: #ff0000;
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      margin: 0 0.5rem;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #cc0000;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="lang-switch">
+    <button onclick="setLang('it')">🇮🇹 Italiano</button>
+    <button onclick="setLang('en')">🇬🇧 English</button>
+  </div>
+
+  <h1 id="title">🚀 Installa la PWA "Back to the Future II"</h1>
+
+  <div class="section" id="ios">
+    <h2>📱 iOS (Safari)</h2>
+    <ol id="iosSteps">
+      <li>Apri questo sito in <strong>Safari</strong>.</li>
+      <li>Tocca l’icona <strong>Condividi</strong> (il quadrato con la freccia verso l’alto).</li>
+      <li>Scorri e seleziona <strong>Aggiungi a Home</strong>.</li>
+      <li>Conferma il nome e premi <strong>Aggiungi</strong>.</li>
+      <li>Troverai l’icona sulla schermata Home, come una normale app.</li>
+    </ol>
+    <p class="note" id="iosNote">Nota: su iOS le PWA funzionano solo tramite Safari.</p>
+  </div>
+
+  <div class="section" id="android">
+    <h2>🤖 Android (Chrome)</h2>
+    <ol id="androidSteps">
+      <li>Apri questo sito in <strong>Google Chrome</strong>.</li>
+      <li>Tocca il menu <strong>⋮</strong> in alto a destra.</li>
+      <li>Seleziona <strong>Aggiungi a schermata Home</strong>.</li>
+      <li>Conferma il nome e premi <strong>Aggiungi</strong>.</li>
+      <li>L’app sarà disponibile nella schermata Home e nel drawer delle app.</li>
+    </ol>
+    <p class="note" id="androidNote">Su Android Chrome rileva automaticamente l'app e propone l’installazione.</p>
+  </div>
+
+  <div class="section" id="tip">
+    <h2>✨ Suggerimento</h2>
+    <p id="tipText">Una volta installata, l’app si aprirà a schermo intero senza barra del browser, offrendo un’esperienza immersiva… proprio come viaggiare nel tempo!</p>
+  </div>  
+
+  <script>
+    const translations = {
+      it: {
+        title: '🚀 Installa la PWA "Back to the Future II"',
+        iosSteps: [
+          'Apri questo sito in <strong>Safari</strong>.',
+          'Tocca l’icona <strong>Condividi</strong> (il quadrato con la freccia verso l’alto).',
+          'Scorri e seleziona <strong>Aggiungi a Home</strong>.',
+          'Conferma il nome e premi <strong>Aggiungi</strong>.',
+          'Troverai l’icona sulla schermata Home, come una normale app.'
+        ],
+        iosNote: 'Nota: su iOS le PWA funzionano solo tramite Safari.',
+        androidSteps: [
+          'Apri questo sito in <strong>Google Chrome</strong>.',
+          'Tocca il menu <strong>⋮</strong> in alto a destra.',
+          'Seleziona <strong>Aggiungi a schermata Home</strong>.',
+          'Conferma il nome e premi <strong>Aggiungi</strong>.',
+          'L’app sarà disponibile nella schermata Home e nel drawer delle app.'
+        ],
+        androidNote: 'Su Android Chrome rileva automaticamente l\'app e propone l’installazione.',
+        tipText: 'Una volta installata, l’app si aprirà a schermo intero senza barra del browser, offrendo un’esperienza immersiva… proprio come viaggiare nel tempo!'
+      },
+      en: {
+        title: '🚀 Install the PWA "Back to the Future II"',
+        iosSteps: [
+          'Open this site in <strong>Safari</strong>.',
+          'Tap the <strong>Share</strong> icon (square with arrow up).',
+          'Scroll and select <strong>Add to Home Screen</strong>.',
+          'Confirm the name and tap <strong>Add</strong>.',
+          'You will find the icon on your Home Screen like a normal app.'
+        ],
+        iosNote: 'Note: on iOS PWAs only work via Safari.',
+        androidSteps: [
+          'Open this site in <strong>Google Chrome</strong>.',
+          'Tap the <strong>⋮</strong> menu at the top right.',
+          'Select <strong>Add to Home Screen</strong>.',
+          'Confirm the name and tap <strong>Add</strong>.',
+          'The app will be available on your Home Screen and in the app drawer.'
+        ],
+        androidNote: 'On Android Chrome automatically detects the app and suggests installation.',
+        tipText: 'Once installed, the app will open full screen without the browser bar, offering an immersive experience… just like time travel!'
+      }
+    };
+
+    function setLang(lang) {
+      const t = translations[lang];
+      document.getElementById('title').innerHTML = t.title;
+      document.getElementById('iosSteps').innerHTML = t.iosSteps.map(s => `<li>${s}</li>`).join('');
+      document.getElementById('iosNote').innerHTML = t.iosNote;
+      document.getElementById('androidSteps').innerHTML = t.androidSteps.map(s => `<li>${s}</li>`).join('');
+      document.getElementById('androidNote').innerHTML = t.androidNote;
+      document.getElementById('tipText').innerHTML = t.tipText;
+    }
+  </script>
+</body>
+</html>
