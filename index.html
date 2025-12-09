@@ -46,28 +46,14 @@
       justify-content: center;
       z-index: 9999;
     }
-    .spinner {
-      display: flex;
-      gap: 1rem;
-    }
-    .spinner div {
-      width: 20px;
-      height: 20px;
-      background: #ffcc00;
-      border-radius: 50%;
-      animation: pulse 0.8s infinite alternate;
-    }
-    .spinner div:nth-child(2) {
-      animation-delay: 0.2s;
-      background: #ff0000;
-    }
-    .spinner div:nth-child(3) {
-      animation-delay: 0.4s;
-      background: #00ccff;
+    .loadingIcon {
+      width: 120px;
+      height: 120px;
+      animation: pulse 1.2s infinite alternate;
     }
     @keyframes pulse {
-      from { transform: scale(1); opacity: 0.6; }
-      to { transform: scale(1.6); opacity: 1; }
+      from { transform: scale(1); opacity: 0.7; }
+      to { transform: scale(1.2); opacity: 1; }
     }
     .loadingText {
       margin-top: 1rem;
@@ -130,10 +116,8 @@
 <body>
   <!-- Schermata di loading -->
   <div id="loadingScreen">
-    <div class="spinner">
-      <div></div><div></div><div></div>
-    </div>
-    <p class="loadingText">⚡ In viaggio nel tempo...</p>
+    <img src="icons/icon-512.png" alt="Logo" class="loadingIcon">
+    <p class="loadingText">⏳ Caricamento...</p>
   </div>
   
   <div class="lang-switch">
